@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'Nodejs-24'
+    }
+    environment {
+
+    }
+    stages{
+        stage('Checkout Code') {
+            steps {
+                git branch 'main'
+                git url: 'https://githum.com'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+            }
+        }
+        stage('Lint Check') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
+        stage('Unit Tests') {
+            steps {
+                sh 'npm test -- --coverage'
+            }
+            post {
+                always {
+
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps{}
+        }
+        stage('') {}
+        stage('') {}
+        stage('') {}
+        stage('') {}
+
+    }
+
+}
