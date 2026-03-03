@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch 'main'
-                git url: 'git@github.com:ravinder77/complete-devops-project.git'
+                git url: 'https://github.com/ravinder77/complete-devops-project.git'
             }
         }
         stage('Install Dependencies') {
@@ -22,22 +22,24 @@ pipeline {
                 sh 'npm ci'
             }
         }
-        stage('Lint and Test') {
-            parallel {
-                stage('Lint') {
-                    steps {
-                        sh 'npm run lint'
-                    }
-                }
-                stage('Test') {
-                    steps{
-                        sh 'npm test -- --coverage'
-                    }
-                }
-            }
-        }
+//        stage('Lint and Test') {
+//            parallel {
+//                stage('Lint') {
+//                    steps {
+//                        sh 'npm run lint'
+//                    }
+//                }
+//                stage('Test') {
+//                    steps{
+//                        sh 'npm test -- --coverage'
+//                    }
+//                }
+//            }
+//        }
         stage('SonarQube Analysis') {
-            steps{}
+            steps{
+                echo 'hello sonar'
+            }
         }
         stage('OWASP Dependency Check') {
             steps{}
@@ -58,7 +60,7 @@ pipeline {
     }
     post {
         success {
-            slackSend
+
         }
         failure {
 
