@@ -3,6 +3,10 @@ pipeline {
     tools {
         nodejs 'Nodejs-24'
     }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timestamps()
+    }
     environment {
 
     }
@@ -10,7 +14,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch 'main'
-                git url: 'https://githum.com'
+                git url: 'git@github.com:ravinder77/complete-devops-project.git'
             }
         }
         stage('Install Dependencies') {
@@ -18,29 +22,49 @@ pipeline {
                 sh 'npm ci'
             }
         }
-        stage('Lint Check') {
-            steps {
-                sh 'npm run lint'
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                sh 'npm test -- --coverage'
-            }
-            post {
-                always {
-
+        stage('Lint and Test') {
+            parallel {
+                stage('Lint') {
+                    steps {
+                        sh 'npm run lint'
+                    }
+                }
+                stage('Test') {
+                    steps{
+                        sh 'npm test -- --coverage'
+                    }
                 }
             }
         }
         stage('SonarQube Analysis') {
             steps{}
         }
-        stage('') {}
-        stage('') {}
-        stage('') {}
-        stage('') {}
+        stage('OWASP Dependency Check') {
+            steps{}
+        }
+        stage('Trivy FileSystem Security Check') {
+            steps{
+
+            }
+        }
+        stage('Build Docker Image') {
+            steps{}
+        }
+        stage('Trivy Image Scan') {}
+        stage('Login to ECR') {}
+        stage('Push Image to ECR'){}
+        stage('Deploy to EKS'){}
 
     }
+    post {
+        success {
+            slackSend
+        }
+        failure {
 
+        }
+        always {
+            cleanws()
+        }
+    }
 }
