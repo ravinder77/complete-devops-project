@@ -13,8 +13,7 @@ pipeline {
     stages{
         stage('Checkout Code') {
             steps {
-                git branch 'main'
-                git url: 'https://github.com/ravinder77/complete-devops-project.git'
+                checkout scm
             }
         }
         stage('Install Dependencies') {
@@ -36,26 +35,26 @@ pipeline {
 //                }
 //            }
 //        }
-        stage('SonarQube Analysis') {
-            steps{
-                echo 'hello sonar'
-            }
-        }
-        stage('OWASP Dependency Check') {
-            steps{}
-        }
-        stage('Trivy FileSystem Security Check') {
-            steps{
-
-            }
-        }
-        stage('Build Docker Image') {
-            steps{}
-        }
-        stage('Trivy Image Scan') {}
-        stage('Login to ECR') {}
-        stage('Push Image to ECR'){}
-        stage('Deploy to EKS'){}
+//        stage('SonarQube Analysis') {
+//            steps{
+//                echo 'hello sonar'
+//            }
+//        }
+//        stage('OWASP Dependency Check') {
+//            steps{}
+//        }
+//        stage('Trivy FileSystem Security Check') {
+//            steps{
+//
+//            }
+//        }
+//        stage('Build Docker Image') {
+//            steps{}
+//        }
+//        stage('Trivy Image Scan') {}
+//        stage('Login to ECR') {}
+//        stage('Push Image to ECR'){}
+//        stage('Deploy to EKS'){}
 
     }
     post {
