@@ -16,11 +16,16 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install Dependencies') {
+        stage('Say Hello'){
             steps {
-                sh 'npm ci'
+                echo 'hello there'
             }
         }
+//        stage('Install Dependencies') {
+//            steps {
+//                sh 'npm ci'
+//            }
+//        }
 //        stage('Lint and Test') {
 //            parallel {
 //                stage('Lint') {
