@@ -57,15 +57,15 @@ pipeline {
 //        stage('Deploy to EKS'){}
 
     }
-    post {
-        success {
-
-        }
-        failure {
-
-        }
-        always {
-            cleanws()
-        }
+//    post {
+//        success {
+//
+//        }
+//        failure {
+//
+//        }
+//        always {
+//            cleanws()
+//        }
     }
 }
