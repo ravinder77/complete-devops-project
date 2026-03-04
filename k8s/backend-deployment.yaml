@@ -16,11 +16,11 @@ spec:
         app: node-app
     spec:
       containers:
-        - name: title
+        - name: node-app
           image: nginx
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               protocol: TCP
       restartPolicy: Always
       
