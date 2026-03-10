@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: title
+  name: node-svc
 spec:
   selector:
-    app: title
+    app: node-svc
   ports:
     - protocol: TCP
       port: 80
