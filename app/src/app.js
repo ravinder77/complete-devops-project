@@ -15,6 +15,18 @@ app.get('/health', (req, res) => {
     })
 })
 
+app.get("/ready", (req, res) => {
+    res.status(200).json({
+        status: 'ready',
+    })
+})
+
+app.get("/liveness", (req, res) => {
+    res.status(200).json({
+        status: 'app is running',
+    })
+})
+
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 })
