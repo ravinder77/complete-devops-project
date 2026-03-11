@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 
 const app = express();
@@ -6,6 +6,7 @@ const app = express();
 app.get('/', (req, res) => {
     res.status(200).json({
         status: 'OK',
+        message: "Node.js App Running"
     })
 })
 
@@ -27,6 +28,4 @@ app.get("/liveness", (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
-})
+module.exports = app;

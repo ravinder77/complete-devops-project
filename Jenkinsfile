@@ -13,33 +13,22 @@ pipeline {
     stages{
         stage('Checkout Code') {
             steps {
-                checkout scm
-            }
-        }
-        stage('Say Hello'){
-            steps {
-                echo 'hello there'
+                branch 'main'
+                git url: ''
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                dir('app'){
+                    sh 'npm install'
+                }
             }
         }
-//        stage('Lint and Test') {
-//            parallel {
-//                stage('Lint') {
-//                    steps {
-//                        sh 'npm run lint'
-//                    }
-//                }
-//                stage('Test') {
-//                    steps{
-//                        sh 'npm test -- --coverage'
-//                    }
-//                }
-//            }
-//        }
+        stage('Run Test') {
+            dir('app'){
+                sh 'npm test'
+            }
+        }
 //        stage('SonarQube Analysis') {
 //            steps{
 //                echo 'hello sonar'
@@ -53,9 +42,11 @@ pipeline {
 //
 //            }
 //        }
-//        stage('Build Docker Image') {
-//            steps{}
-//        }
+        stage('Build Docker Image') {
+            steps{
+
+            }
+        }
 //        stage('Trivy Image Scan') {}
 //        stage('Login to ECR') {}
 //        stage('Push Image to ECR'){}
