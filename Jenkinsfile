@@ -44,7 +44,7 @@ pipeline {
 //        }
         stage('Build Docker Image') {
             steps{
-
+                sh 'chmod +x build.sh'
             }
         }
 //        stage('Trivy Image Scan') {}
