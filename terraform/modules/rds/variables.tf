@@ -9,7 +9,7 @@ variable "engine" {
   type = string
   default = "postgres"
   validation {
-    condition = contains(["postgres", "mysql, mariadb"], var.engine)
+    condition = contains(["postgres", "mysql", "mariadb"], var.engine)
     error_message = "Engine must be postgres, mysql, or mariadb."
   }
 }
@@ -30,6 +30,12 @@ variable "allocated_storage" {
   description = "Initial storage in GB"
   type = number
   default = 20
+}
+
+variable "storage_encrypted" {
+  description = "Enable Storage encryption"
+  type = bool
+  default = true
 }
 
 variable "max_allocated_storage" {
