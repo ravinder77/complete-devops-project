@@ -22,3 +22,17 @@ resource "aws_secretsmanager_secret_version" "rds" {
     dbname   = var.db_name
   })
 }
+
+
+# ─── KMS key for encryption at rest ───────────────────
+resource "aws_kms_key" "rds" {
+  description             = "KMS key for ${var.identifier} RDS"
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+  tags                    = local.common_tags
+}
+
+resource "aws_kms_alias" "rds" {
+  name          = "alias/${var.identifier}-rds"
+  target_key_id = aws_kms_key.rds.key_id
+}
