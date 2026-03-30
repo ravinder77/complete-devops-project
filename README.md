@@ -1,1 +1,1 @@
-# complete-devops-project
+# complete-devsecops-pipeline
